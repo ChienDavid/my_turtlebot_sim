@@ -12,16 +12,16 @@ class TestRobotMoves(unittest.TestCase):
     def movement_callback(self, data):
         """Get the robot's position"""
         # find the index of the turtlebot model within all Gazebo models
-        if self.idx is None:
-            self.idx = 0
+        if self.idx == 0:
             for name in data.name:
                 if name == 'turtlebot3_burger':
                     break
                 self.idx += 1
                 
         # save current x,y position in the sim world
-        self.x = data.pose[self.idx].position.x
-        self.y = data.pose[self.idx].position.y
+        if self.idx < len(data.pose):
+            self.x = data.pose[self.idx].position.x
+            self.y = data.pose[self.idx].position.y
 
     def get_distance_from_spawn(self):
         """Get total distance away from the spawn point"""
@@ -30,7 +30,7 @@ class TestRobotMoves(unittest.TestCase):
 
     def test_movement(self):
         """Test that the robot is continuously movement"""
-        self.idx = None
+        self.idx = 0
         self.x = 0.
         self.y = 0.
 

@@ -18,13 +18,6 @@ class TurtlebotSim:
             self.vel_publisher.publish(self.vel)
             self.rate.sleep()
 
-        # stop the robot
-        rospy.sleep(1)
-        self.vel.linear.x = 0.
-        self.vel.angular.z = 0.
-        self.vel_publisher.publish(self.vel)
-        rospy.sleep(0.5)
-
 
 
 if __name__=='__main__':

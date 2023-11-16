@@ -10,7 +10,7 @@ env:
   TURTLEBOT3_MODEL: burger
 
 jobs:
-  simulation:
+  ros-simulation:
     # Run steps with the ROS Noetic container
     container: public.ecr.aws/docker/library/ros:noetic-robot
     runs-on: ubuntu-latest
