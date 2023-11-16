@@ -10,20 +10,10 @@ env:
   TURTLEBOT3_MODEL: burger
 
 jobs:
-  simulation:
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        ros_distribution: [noetic]
-        include:
-          - docker_image: ubuntu:focal
-            ros_distribution: noetic
-            ros_version: 1
-
+  ros-simulation:
     # Run steps with the ROS Noetic container
-    container:
-      image: ${{matrix.docker_image}}
+    container: public.ecr.aws/docker/library/ros:noetic-robot
+    runs-on: ubuntu-latest
 
     # Use bash and our catkin workspace folder
     defaults:
