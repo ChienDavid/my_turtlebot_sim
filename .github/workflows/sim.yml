@@ -3,9 +3,9 @@ name: Run tests in simulation
 # Run the tests when we push to the main branch
 on:
   push:
-    branches: [main, develop]
+    branches: [develop]
   pull_request:
-    branches: [main, develop]
+    branches: [develop]
 
 # Default to the burger variant of Turtlebot
 env:
