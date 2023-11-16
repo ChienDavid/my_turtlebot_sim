@@ -10,8 +10,7 @@ from gazebo_msgs.msg import ModelStates
 
 class TestRobotMoves(unittest.TestCase):
     def movement_callback(self, data):
-        """Record the robot's simulation world position whenever it's updated.
-        So that we can check how far it has travelled from the spawn point."""
+        """Get the robot's position"""
         # find the index of the turtlebot model within all Gazebo models
         if self.idx is None:
             self.idx = 0
@@ -25,12 +24,12 @@ class TestRobotMoves(unittest.TestCase):
         self.y = data.pose[self.idx].position.y
 
     def get_distance_from_spawn(self):
-        """Use Pythagoras to get total distance away from the spawn point"""
+        """Get total distance away from the spawn point"""
         return math.sqrt(abs(self.x)**2 + abs(self.y)**2)
 
 
     def test_movement(self):
-        """Test that the robot is continuously movement by tracking how far it has travelled from its original spawn point (0, 0, 0)"""
+        """Test that the robot is continuously movement"""
         self.idx = None
         self.x = 0.
         self.y = 0.

@@ -3,8 +3,7 @@ name: Run tests in simulation
 # Run the tests when we push to the main branch
 on:
   push:
-    branches:
-      - main
+    branches: [main]
 
 # Default to the burger variant of Turtlebot
 env:
@@ -12,9 +11,19 @@ env:
 
 jobs:
   simulation:
-    # Run steps with the ROS Noetic container
-    container: public.ecr.aws/docker/library/ros:noetic-robot
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ros_distribution: [noetic]
+        include:
+          - docker_image: ubuntu:focal
+            ros_distribution: noetic
+            ros_version: 1
+
+    # Run steps with the ROS Noetic container
+    container:
+      image: ${{matrix.docker_image}}
 
     # Use bash and our catkin workspace folder
     defaults:
@@ -24,7 +33,8 @@ jobs:
 
     steps:
       # check out the code
-      - uses: actions/checkout@v2
+      - name: checkout
+        uses: actions/checkout@v2
 
       # build our workspace
       - name: Build workspace
