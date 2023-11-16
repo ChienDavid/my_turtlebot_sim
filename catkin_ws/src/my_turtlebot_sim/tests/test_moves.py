@@ -30,6 +30,7 @@ class TestRobotMoves(unittest.TestCase):
 
     def test_movement(self):
         """Test that the robot is continuously movement"""
+        # set idx and position
         self.idx = 0
         self.x = 0.
         self.y = 0.
